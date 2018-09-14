@@ -7,8 +7,6 @@ topics.forEach(topic => {
     `)
 });
 
-
-
 //Adds new city inputs to array and appends on page
 function submitButton () {
     event.preventDefault();
@@ -21,7 +19,6 @@ function submitButton () {
 }
 
 //Click function to load gif's onto page
-
 $(document).on('click', 'button', function (){
     event.preventDefault()
     let city = $(this).attr("data-city");
@@ -33,7 +30,7 @@ $.ajax({
     url: queryURL,
     method: "GET"
   })
-  
+
   .then(function(response) {
     console.log(response)
     var results = response.data;
@@ -43,7 +40,7 @@ $.ajax({
         var rating = results[i].rating;
         var p = $("<p>").text("Rating: " + rating);
         var cityImage = $("<img class='gif' data-state='still'>");
-        var still = cityImage.attr("data-still", results[i].images.fixed_height_still.url, );
+        var still = cityImage.attr("data-still", results[i].images.fixed_height_still.url);
         var animate = cityImage.attr("data-animate", results[i].images.fixed_height.url);
          var gif = cityImage.attr("src", results[i].images.fixed_height_still.url);
         
@@ -53,24 +50,24 @@ $.ajax({
         $('.cities').prepend(gifDiv)
 
 //function to play gifs... not working corrrectly yet
-$(".gif").on("click", function() {
-    event.preventDefault()
-    // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
-    var state = $(this).attr("data-state");
-    // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-    // Then, set the image's data-state to animate
-    // Else set src to the data-still value
-    if (state === "still") {
-      $(this).attr("src", $(this).attr("data-animate"));
-      $(this).attr("data-state", "animate");
-    } else {
-      $(this).attr("src", $(this).attr("data-still"));
-      $(this).attr("data-state", "still");
-    }
-  });
-    }
-  });
+}
+});
 })
+      $("body").on("click", ".gif", function() {
+          event.preventDefault()
+          // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+          var state = $(this).attr("data-state");
+          // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+          // Then, set the image's data-state to animate
+          // Else set src to the data-still value
+          if (state === "still") {
+            $(this).attr("src", $(this).attr("data-animate"));
+            $(this).attr("data-state", "animate");
+          } else {
+            $(this).attr("src", $(this).attr("data-still"));
+            $(this).attr("data-state", "still");
+          }
+        });
 
 
 // API KEY : DBXEKdV9GEVi8rfqhgVELojemQkA50g2

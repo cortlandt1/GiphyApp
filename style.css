@@ -14,5 +14,15 @@
 .item {
     position: relative;
     margin: 5px;
-    left: 13px;
+    
+}
+
+#cityButtons {
+    display: flex;
+    justify-content: center;
+}
+
+.cities {
+    display: flex;
+    justify-content: center;
 }

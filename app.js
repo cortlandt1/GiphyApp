@@ -16,10 +16,13 @@ function submitButton () {
     topics.push(newCity)
     $('#cityButtons').append(`
     <button type="button" class="btn btn-outline-primary" data-city='${newCity}'>${newCity}</button>`)
+    $('#city-input').val('')
+    console.log(newCity)
 }
+
 //Click function to load gif's onto page
 
-$('button').on('click', function (){
+$(document).on('click', 'button', function (){
     event.preventDefault()
     let city = $(this).attr("data-city");
     console.log(city)
@@ -29,7 +32,9 @@ var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + city + "&api_key=DBXEK
 $.ajax({
     url: queryURL,
     method: "GET"
-  }).then(function(response) {
+  })
+  
+  .then(function(response) {
     console.log(response)
     var results = response.data;
 
@@ -37,12 +42,35 @@ $.ajax({
         var gifDiv = $("<div class='item'>");
         var rating = results[i].rating;
         var p = $("<p>").text("Rating: " + rating);
-        var cityImage = $("<img>");
-        cityImage.attr("src", results[i].images.fixed_height.url);
+        var cityImage = $("<img class='gif' data-state='still'>");
+        var still = cityImage.attr("data-still", results[i].images.fixed_height_still.url, );
+        var animate = cityImage.attr("data-animate", results[i].images.fixed_height.url);
+         var gif = cityImage.attr("src", results[i].images.fixed_height_still.url);
+        
+        // console.log(image)
         gifDiv.append(p)
         gifDiv.append(cityImage);
         $('.cities').prepend(gifDiv)
+
+//function to play gifs... not working corrrectly yet
+$(".gif").on("click", function() {
+    event.preventDefault()
+    // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+    var state = $(this).attr("data-state");
+    // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+    // Then, set the image's data-state to animate
+    // Else set src to the data-still value
+    if (state === "still") {
+      $(this).attr("src", $(this).attr("data-animate"));
+      $(this).attr("data-state", "animate");
+    } else {
+      $(this).attr("src", $(this).attr("data-still"));
+      $(this).attr("data-state", "still");
+    }
+  });
     }
   });
 })
+
+
 // API KEY : DBXEKdV9GEVi8rfqhgVELojemQkA50g2

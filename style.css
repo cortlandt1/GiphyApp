@@ -1,0 +1,28 @@
+#city-form {
+    padding: 10px;
+}
+
+#city-form {
+    display: flex;
+    justify-content: center;
+}
+
+#city-input {
+    margin: 5px;
+}
+
+.item {
+    position: relative;
+    margin: 5px;
+    
+}
+
+#cityButtons {
+    display: flex;
+    justify-content: center;
+}
+
+.cities {
+    display: flex;
+    justify-content: center;
+}

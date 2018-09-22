@@ -24,7 +24,7 @@ $(document).on('click', 'button', function (){
     let city = $(this).attr("data-city");
     console.log(city)
 
-var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + city + "&api_key=DBXEKdV9GEVi8rfqhgVELojemQkA50g2&limit=10"
+var queryURL = "https://cors-anywhere.herokuapp.com/http://api.giphy.com/v1/gifs/search?q=" + city + "&api_key=DBXEKdV9GEVi8rfqhgVELojemQkA50g2&limit=10"
 
 $.ajax({
     url: queryURL,

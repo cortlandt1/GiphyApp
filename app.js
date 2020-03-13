@@ -11,11 +11,15 @@ topics.forEach(topic => {
 function submitButton () {
     event.preventDefault();
     let newCity = $('#city-input').val();
+    if (newCity === "" ) {
+        console.error ('no data')
+    } else {
     topics.push(newCity)
     $('#cityButtons').append(`
     <button type="button" class="btn btn-outline-primary" data-city='${newCity}'>${newCity}</button>`)
     $('#city-input').val('')
     console.log(newCity)
+    }
 }
 
 //Click function to load gif's onto page
